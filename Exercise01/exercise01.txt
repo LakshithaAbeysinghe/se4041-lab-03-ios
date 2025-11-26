@@ -1,0 +1,98 @@
+import SwiftUI
+
+struct CircleImage: View {
+    var body: some View {
+        Image("turtlerock")
+            .clipShape(Circle())
+            .overlay {
+                Circle().stroke(.gray, lineWidth: 4)
+            }
+            .shadow(radius: 7)
+    }
+}
+
+#Preview {
+    CircleImage()
+}
+
+
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+            VStack {
+                MapView()
+                    .frame(height: 300)
+
+
+                CircleImage()
+                    .offset(y: -130)
+                    .padding(.bottom, -130)
+
+
+                VStack(alignment: .leading) {
+                    Text("Turtle Rock")
+                        .font(.title)
+                    HStack {
+                        Text("Joshua Tree National Park")
+                        Spacer()
+                        Text("California")
+                    }
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+
+
+                    Divider()
+
+
+                    Text("About Turtle Rock")
+                        .font(.title2)
+                    Text("Descriptive text goes here.")
+                }
+                .padding()
+
+
+                Spacer()
+            }
+        }
+}
+
+
+#Preview {
+    ContentView()
+}
+
+
+import SwiftUI
+
+@main
+struct LandmarksApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+
+import SwiftUI
+import MapKit
+
+struct MapView: View {
+    var body: some View {
+            Map(initialPosition: .region(region))
+        }
+
+
+        private var region: MKCoordinateRegion {
+            MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868),
+                span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+            )
+        }
+}
+
+#Preview {
+    MapView()
+}
+
+
